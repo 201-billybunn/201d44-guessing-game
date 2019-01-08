@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>McCodeFellows</title>
+    </head>
+    <body>
+        <h1>McCodeFellows</h1>
+        <hr>
+        <h3>CONFIRM YOUR ORDER HERE</h2>
+        <p>Name: <strong><span id="order-name"></span></strong></p>
+        <p>Order: <strong><span id="order"></span></strong></p>
+        <p>Super-sized? <strong><span id="super-sized"></span></strong></p>
+        <p>Eating in the car? <strong><span id="in-car"></span></strong></p>
+        <h3>Total: $<strong></strong><span id="total"></span></strong></h3>
+        
+        <script>
+        // Question #1: Order name?
+            var orderName = prompt('Hi, welcome to McCodeFellows. Can I get a name for your order?') || 'dude';
+            console.log('Order name: ' + orderName);
+            document.getElementById('order-name').innerHTML = orderName;
+
+        // Question #2: What can I get for you today?
+            var order = prompt(`Alright, ${orderName}, \nWhat can I get for you today?`) || 'food';
+            console.log('Order: ' + order)
+            document.getElementById('order').innerHTML = order;
+
+        // Question #3: Extra large meal? (Must say yes)
+            var superSized;
+            function question3() {
+                var superSized = prompt(`Ok, I have an order of ${order}.\nWould you like to make that a super-sized meal for just a dollar more, ${orderName}?\nAnswer Y or N.`);
+                while (superSized !== 'Y') {
+                    var superSized = prompt(`Don\'t be cheap, ${orderName}.\nAnswer Y.`);
+                    console.log('Super-sized? ' + superSized);
+                    document.getElementById('super-sized').innerHTML = superSized;
+                }
+            }
+            question3();
+            alert(`Fantastic, ${orderName}!\nI'll upgrade that order of ${order} to a super-sized meal.`)
+            
+        // Question #4: Are you eating in the car today?
+            var inCar;
+            function question4() {
+                var inCar = prompt(`Will you be eating in your car today, ${orderName}?\nAnswer Y or N.`);
+                if (inCar === 'Y') {
+                    alert(`Seriously?\nWe'll add some placemats for you, ${orderName}.\nGood luck getting those ${order} crumbs out of your interior.`);
+                    document.getElementById('in-car').innerHTML = inCar;
+                } else if (inCar === 'N') {
+                    alert(`Ok, we'll bag up that order of ${order} for you, ${orderName}.`);
+                    document.getElementById('in-car').innerHTML = inCar;
+                } else {
+                    alert('Answer with Y or N.');
+                    question4();
+                } 
+                console.log('In the car? ' + inCar);
+            }
+            question4();
+
+        // Ending and random total
+            if (inCar === 'Y') {
+            alert(`Alright, ${orderName}.\nI have a super-sized order of ${order} that you'll be enjoying in the car today.`)
+            } else {
+            alert(`Alright, ${orderName}.\nI have a super-sized order of ${order} in a to-go bag.`)
+            }
+            var total = (Math.random() * 1000).toFixed(2)
+            alert('Your total is $' + total + ' at the window. \nThank you!')
+            console.log('Total: $' + total);
+            document.getElementById('total').innerHTML = total;
+        </script>
+    </body>
+</html>
